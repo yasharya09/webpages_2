@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 1 Submission</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Task 1 Submission</h1>
+
+    <div class="form-container">
+        <form id="task1-form" enctype="multipart/form-data">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="regno">Reg No / Username:</label>
+            <input type="text" id="regno" name="regno" required>
+
+            <label for="fileUpload">Upload Your Work:</label>
+            <input type="file" id="fileUpload" name="fileUpload" required>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('task1-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Create a FormData object to hold the form data
+            var formData = new FormData(this);
+
+            // Send the form data to the backend using Fetch API
+            fetch('http://localhost:5000/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('File submitted successfully!');
+                    // Mark task1 as completed in local storage
+                    let completedTasks = JSON.parse(localStorage.getItem('completedTasks')) || [];
+                    if (!completedTasks.includes('task1')) {
+                        completedTasks.push('task1');
+                        localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
+                    }
+                    // Redirect back to the team page
+                    window.location.href = '/teams/team123.html'; // Make sure this URL matches your setup
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while uploading the file.');
+            });
+        });
+    </script>
+
+</body>
+</html>

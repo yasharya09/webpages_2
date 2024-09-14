@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team 456 - Tasks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .task-list {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .task-list h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f8f8f8;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            text-align: center;
+        }
+        .task-item:hover {
+            background-color: #f0f0f0;
+        }
+        .status {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="task-list">
+        <h2>Team 456 - Tasks</h2>
+        <div class="task-item" onclick="window.location.href='/tasks/task1.html'">
+            <span>Task 1</span>
+            <span class="status" id="status-task1">X</span>
+        </div>
+        <div class="task-item" onclick="window.location.href='/tasks/task2.html'">
+            <span>Task 2</span>
+            <span class="status" id="status-task2">X</span>
+        </div>
+        <div class="task-item" onclick="window.location.href='/tasks/task3.html'">
+            <span>Task 3</span>
+            <span class="status" id="status-task3">X</span>
+        </div>
+        <div class="task-item" onclick="window.location.href='/tasks/task4.html'">
+            <span>Task 4</span>
+            <span class="status" id="status-task4">X</span>
+        </div>
+        <div class="task-item" onclick="window.location.href='/tasks/task5.html'">
+            <span>Task 5</span>
+            <span class="status" id="status-task5">X</span>
+        </div>
+    </div>
+
+    <script>
+        // Check local storage for completed tasks and update the UI
+        function updateTaskStatus() {
+            const completedTasks = JSON.parse(localStorage.getItem('completedTasks')) || [];
+            completedTasks.forEach(task => {
+                const statusElement = document.getElementById(`status-${task}`);
+                if (statusElement) {
+                    statusElement.innerText = '✓'; // Change X to tick mark
+                }
+            });
+        }
+
+        // Run the function to update task status on page load
+        window.onload = updateTaskStatus;
+    </script>
+
+</body>
+</html>

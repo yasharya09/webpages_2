@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Submission</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .task-box {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .task-box h2 {
+            margin-bottom: 20px;
+        }
+        .task-box a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .task-box a:hover {
+            background-color: #0056b3;
+        }
+        .task-box button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .task-box button:hover {
+            background-color: #218838;
+        }
+        .readonly-box {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="task-box">
+        <h2>Task Submitting Form</h2>
+
+        <!-- Read-only text for students -->
+        <div class="readonly-box">
+            Task details will appear here (read-only for students).
+        </div>
+
+        <!-- Replace with your actual Google Form link -->
+        <a href="https://docs.google.com/forms/d/your-google-form-id" target="_blank">Open Google Form</a>
+        <br><br>
+        <button id="submitBtn">Mark as Submitted</button>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').onclick = function() {
+            alert('Task marked as submitted!');
+            // Optionally redirect to the team page after submission
+            window.location.href = '/team123.html';
+        };
+    </script>
+
+</body>
+</html>

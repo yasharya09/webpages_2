@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .submit-button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Student Profile</h1>
+    </div>
+
+    <div class="form-container">
+        <form id="studentProfileForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="programme">Programme:</label>
+                <input type="text" id="programme" name="programme" required>
+            </div>
+            <div class="form-group">
+                <label for="year">Year:</label>
+                <input type="text" id="year" name="year" required>
+            </div>
+            <div class="form-group">
+                <label for="institute">Institute:</label>
+                <input type="text" id="institute" name="institute" required>
+            </div>
+            <button type="submit" class="submit-button">Save Profile</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('studentProfileForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            const formData = new FormData(this);
+            const studentProfile = {};
+            formData.forEach((value, key) => {
+                studentProfile[key] = value;
+            });
+            localStorage.setItem('studentProfile', JSON.stringify(studentProfile));
+            alert('Profile saved successfully!');
+        });
+    </script>
+
+</body>
+</html>

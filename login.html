@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .dialog-box {
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 300px; /* Adjust this width as necessary */
+        }
+        input {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        p {
+            text-align: center;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .register {
+            display: none; /* Hidden by default */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dialog-box">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button onclick="login()">Login</button>
+        <p><a href="#" onclick="toggleRegister()">Don't have an account? Register</a></p>
+
+        <div class="register">
+            <h2>Register</h2>
+            <input type="text" id="first-name" placeholder="First Name" required>
+            <input type="text" id="last-name" placeholder="Last Name" required>
+            <input type="email" id="email" placeholder="Email ID" required>
+            <input type="email" id="confirm-email" placeholder="Confirm Email ID" required>
+            <input type="password" id="register-password" placeholder="Password" required>
+            <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+            <button onclick="register()">Register</button>
+            <p><a href="#" onclick="toggleRegister()">Back to Login</a></p>
+        </div>
+    </div>
+
+    <script>
+        function toggleRegister() {
+            document.querySelector('.register').style.display = 
+                document.querySelector('.register').style.display === 'none' ? 'block' : 'none';
+        }
+
+        function login() {
+            // Get the input values
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Validate user credentials (update this as needed)
+            // Here, it checks against hard-coded credentials for demo purposes.
+            if (username === 'student1' && password === 'password') {
+                window.location.href = 'students/dashboard.html';
+            } else if (username === 'supervisor1' && password === 'password') {
+                window.location.href = 'supervisors/dashboard2.html';
+            } else if (username === 'admin' && password === 'password') {
+                window.location.href = 'admin/dashboard3.html';
+            } else {
+                alert('Invalid credentials. Please try again.');
+            }
+        }
+
+        function register() {
+            const firstName = document.getElementById('first-name').value;
+            const lastName = document.getElementById('last-name').value;
+            const email = document.getElementById('email').value;
+            const confirmEmail = document.getElementById('confirm-email').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (email !== confirmEmail) {
+                alert("Emails do not match.");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return;
+            }
+
+            fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    firstName,
+                    lastName,
+                    email,
+                    password
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Registration successful! Redirecting to login...');
+                    window.location.href = '/login.html'; // Redirect to login page after registration
+                } else {
+                    alert('An error occurred during registration: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred during registration.');
+            });
+        }
+    </script>
+
+</body>
+</html>

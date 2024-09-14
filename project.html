@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .task {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .task-link {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .task-link:hover {
+            background-color: #0056b3;
+        }
+        .progress-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin: 10px 0; /* Space between progress and task title */
+        }
+        .progress-bar {
+            height: 20px;
+            background-color: #007bff;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+            line-height: 20px; /* Center text vertically */
+        }
+        .status {
+            font-size: 14px;
+        }
+        .overall-progress {
+            margin-bottom: 20px; /* Space below the overall progress */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Projects</h1>
+
+    <div class="overall-progress">
+        <h2>Overall Progress</h2>
+        <span class="progress-container">
+            <div class="progress-bar" id="overall-progress" style="width: 0%;">0%</div>
+        </span>
+    </div>
+
+    <div class="task">
+        <h2>Task 1</h2>
+        <div class="status" id="task1-status">❌ Not Attempted</div>
+        <a href="tasks/task1.html" class="task-link">View Task 1 Form</a>
+    </div>
+    
+    <div class="task">
+        <h2>Task 2</h2>
+        <div class="status" id="task2-status">❌ Not Attempted</div>
+        <a href="tasks/task2.html" class="task-link">View Task 2 Form</a>
+    </div>
+
+    <div class="task">
+        <h2>Task 3</h2>
+        <div class="status" id="task3-status">❌ Not Attempted</div>
+        <a href="tasks/task3.html" class="task-link">View Task 3 Form</a>
+    </div>
+
+    <div class="task">
+        <h2>Task 4</h2>
+        <div class="status" id="task4-status">❌ Not Attempted</div>
+        <a href="tasks/task4.html" class="task-link">View Task 4 Form</a>
+    </div>
+
+    <div class="task">
+        <h2>Task 5</h2>
+        <div class="status" id="task5-status">❌ Not Attempted</div>
+        <a href="tasks/task5.html" class="task-link">View Task 5 Form</a>
+    </div>
+
+    <script>
+        // Check task submission status and update UI
+        const tasks = [1, 2, 3, 4, 5];
+        let completedTasks = 0;
+
+        tasks.forEach(task => {
+            const taskStatus = localStorage.getItem(`task${task}Completed`);
+            const statusElement = document.getElementById(`task${task}-status`);
+
+            if (taskStatus === 'true') {
+                statusElement.innerHTML = '✔️ Attempted';
+                completedTasks++;
+            } else {
+                statusElement.innerHTML = '❌ Not Attempted';
+            }
+        });
+
+        // Calculate and update overall progress
+        const overallProgress = document.getElementById('overall-progress');
+        const overallPercentage = (completedTasks / tasks.length) * 100;
+        overallProgress.style.width = `${overallPercentage}%`;
+        overallProgress.innerHTML = `${overallPercentage.toFixed(0)}%`;
+    </script>
+
+</body>
+</html>
